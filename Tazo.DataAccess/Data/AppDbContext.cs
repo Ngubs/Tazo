@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,17 @@ using Tazo.Models.Entities;
 
 namespace Tazo.DataAccess.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options) 
-        {
-        }      
+              
         public DbSet<Course> Courses => Set<Course>();
         public DbSet<Module> Modules => Set<Module>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //This will ensure that EF Core Identities are configured correctly
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Course>().HasData(
                 new Course 
                 { 

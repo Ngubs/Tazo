@@ -11,8 +11,8 @@ using Tazo.DataAccess.Data;
 namespace Tazo.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250406235022_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250429075204_UpdatedMigration")]
+    partial class UpdatedMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,12 +38,49 @@ namespace Tazo.DataAccess.Migrations
                     b.Property<string>("CourseTitle")
                         .HasColumnType("text");
 
+                    b.Property<int>("NQF")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Year")
                         .HasColumnType("integer");
 
                     b.HasKey("CourseId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseId = 1,
+                            CourseCode = "BCA1",
+                            CourseTitle = "Bachelor of Computer and Information Science 1",
+                            NQF = 7,
+                            Year = 1
+                        },
+                        new
+                        {
+                            CourseId = 2,
+                            CourseCode = "BCA2",
+                            CourseTitle = "Bachelor of Computer and Information Science 2",
+                            NQF = 7,
+                            Year = 2
+                        },
+                        new
+                        {
+                            CourseId = 3,
+                            CourseCode = "BCA3",
+                            CourseTitle = "Bachelor of Computer and Information Science 3",
+                            NQF = 7,
+                            Year = 3
+                        },
+                        new
+                        {
+                            CourseId = 4,
+                            CourseCode = "PDDA",
+                            CourseTitle = "Postgraduate Diploma in Data Analytics",
+                            NQF = 8,
+                            Year = 1
+                        });
                 });
 
             modelBuilder.Entity("Tazo.Models.Entities.Module", b =>
