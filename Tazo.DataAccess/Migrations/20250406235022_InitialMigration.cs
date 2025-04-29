@@ -3,12 +3,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Tazo.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +19,7 @@ namespace Tazo.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CourseCode = table.Column<string>(type: "text", nullable: true),
                     CourseTitle = table.Column<string>(type: "text", nullable: true),
-                    Year = table.Column<int>(type: "integer", nullable: false),
-                    NQF = table.Column<int>(type: "integer", nullable: false)
+                    Year = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,17 +45,6 @@ namespace Tazo.DataAccess.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "CourseId");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Courses",
-                columns: new[] { "CourseId", "CourseCode", "CourseTitle", "NQF", "Year" },
-                values: new object[,]
-                {
-                    { 1, "BCA1", "Bachelor of Computer and Information Science 1", 7, 1 },
-                    { 2, "BCA2", "Bachelor of Computer and Information Science 2", 7, 2 },
-                    { 3, "BCA3", "Bachelor of Computer and Information Science 3", 7, 3 },
-                    { 4, "PDDA", "Postgraduate Diploma in Data Analytics", 8, 1 }
                 });
 
             migrationBuilder.CreateIndex(
